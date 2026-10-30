@@ -1,0 +1,44 @@
+</script>
+<h1>CineMatch 🎬</h1>
+
+<h2>Discover Your Next Favourite Movie</h2>
+<div class="auth-container" id="authSection">
+
+    <h2>Welcome to CineMatch</h2>
+
+    <input type="text" id="username"
+    placeholder="Enter your name">
+
+    <input type="email" id="email"
+    placeholder="Enter your email">
+
+    <input type="password" id="password"
+    placeholder="Enter your password">
+
+    <button onclick="signUp()">Create Account</button>
+
+    <button onclick="login()">Login</button>
+
+    <button onclick="logout()" id="logoutBtn"
+    style="display:none;">Logout</button>
+
+    <p id="authMessage"></p>
+
+</div>
+
+<div class="search-box">
+    <input
+        type="text"
+        id="search"
+        placeholder="Search for a movie..."
+    >
+    <button onclick="searchMovie()">Search</button>
+</div>
+
+<div id="movies"></div>
+
+<div id="movie-details"></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+
