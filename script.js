@@ -347,10 +347,16 @@ async function startFirebase() {
         await loadFirebaseScript(
             "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"
         );
+        
+        await loadFirebaseScript(
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"
+);
 
         firebase.initializeApp(firebaseConfig);
 
         const auth = firebase.auth();
+        
+        const db = firebase.firestore();
 
         console.log("Firebase connected successfully!");
 
@@ -448,5 +454,3 @@ async function startFirebase() {
 }
 
 startFirebase();
-
-
