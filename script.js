@@ -502,4 +502,5 @@ window.addToFavorites = async function(movie) {
 }
 
 startFirebase();
-            
+
+                    
