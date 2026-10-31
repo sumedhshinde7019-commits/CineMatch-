@@ -1,53 +1,66 @@
 
-</body>
-</html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CineMatch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<h1>CineMatch 🎬</h1>
+<body>
 
-<p class="creator-top">
-    Created by <strong>Sumedh Shinde</strong>
-</p>
+    <h1>CineMatch 🎬</h1>
 
-<h2>Discover Your Next Favourite Movie</h2>
-<div class="auth-container" id="authSection">
+    <p class="creator-top">
+        Created by <strong>Sumedh Shinde</strong>
+    </p>
 
-    <h2>Welcome to CineMatch</h2>
+    <h2>Discover Your Next Favourite Movie</h2>
 
-    <input type="text" id="username"
-    placeholder="Enter your name">
+    <!-- ACCOUNT SECTION -->
 
-    <input type="email" id="email"
-    placeholder="Enter your email">
+    <div class="auth-container" id="authSection">
 
-    <input type="password" id="password"
-    placeholder="Enter your password">
+        <h2>Welcome to CineMatch</h2>
 
-    <button onclick="signUp()">Create Account</button>
+        <input type="text" id="username"
+        placeholder="Enter your name">
 
-    <button onclick="login()">Login</button>
+        <input type="email" id="email"
+        placeholder="Enter your email">
 
-    <button onclick="logout()" id="logoutBtn"
-    style="display:none;">Logout</button>
+        <input type="password" id="password"
+        placeholder="Enter your password">
 
-    <p id="authMessage"></p>
+        <button onclick="signUp()">Create Account</button>
 
-</div>
+        <button onclick="login()">Login</button>
 
-<div class="search-box">
-    <input
-        type="text"
-        id="search"
-        placeholder="Search for a movie..."
-    >
-    <button onclick="searchMovie()">Search</button>
-</div>
+        <button onclick="logout()" id="logoutBtn"
+        style="display:none;">Logout</button>
 
-<div id="movies"></div>
+        <p id="authMessage"></p>
 
-<div id="movie-details"></div>
+    </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <input type="text" id="search"
+        placeholder="Search for a movie...">
+
+        <button onclick="searchMovie()">Search</button>
+
+    </div>
+
+    <!-- MOVIES -->
+
+    <div id="movies"></div>
+
+    <div id="movie-details"></div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>
