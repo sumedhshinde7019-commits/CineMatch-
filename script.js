@@ -1,4 +1,6 @@
- const API_KEY = "56d6e15266e5f7bac879f7ee7ecf9553";
+ 
+            
+const API_KEY = "56d6e15266e5f7bac879f7ee7ecf9553";
 
 const API_URL = "https://api.themoviedb.org/3";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
@@ -502,5 +504,3 @@ window.addToFavorites = async function(movie) {
 }
 
 startFirebase();
-
-                    
