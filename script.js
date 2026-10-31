@@ -1,4 +1,4 @@
-const API_KEY = "56d6e15266e5f7bac879f7ee7ecf9553";
+ const API_KEY = "56d6e15266e5f7bac879f7ee7ecf9553";
 
 const API_URL = "https://api.themoviedb.org/3";
 const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
@@ -60,10 +60,26 @@ async function loadMovies(query = "") {
                 "📅 " + (movie.release_date || "Release date unavailable");
             card.appendChild(release);
 
-            const button = document.createElement("button");
-            button.textContent = "View Details";
-            button.onclick = () => showMovieDetails(movie.id);
-            card.appendChild(button);
+            // FAVORITE BUTTON
+
+const favoriteButton = document.createElement("button");
+favoriteButton.textContent = "❤️ Add to Favorites";
+
+favoriteButton.style.backgroundColor = "green";
+favoriteButton.style.color = "white";
+
+favoriteButton.onclick = (event) => {
+    event.stopPropagation();
+    addToFavorites(movie);
+};
+
+card.appendChild(favoriteButton);
+
+
+const button = document.createElement("button");
+button.textContent = "View Details";
+button.onclick = () => showMovieDetails(movie.id);
+card.appendChild(button);
 
             card.onclick = event => {
                 if (event.target !== button) {
@@ -357,6 +373,38 @@ async function startFirebase() {
         const auth = firebase.auth();
         
         const db = firebase.firestore();
+        
+        // ADD MOVIE TO FAVORITES
+
+window.addToFavorites = async function(movie) {
+
+    const user = auth.currentUser;
+
+    if (!user) {
+        alert("Please login to add favorite movies!");
+        return;
+    }
+
+    try {
+        await db.collection("users")
+            .doc(user.uid)
+            .collection("favorites")
+            .doc(String(movie.id))
+            .set({
+                movieId: movie.id,
+                title: movie.title,
+                poster: movie.poster_path || "",
+                rating: movie.vote_average || 0,
+                releaseDate: movie.release_date || ""
+            });
+
+        alert("❤️ Movie added to favorites!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Unable to save favorite movie.");
+    }
+};
 
         console.log("Firebase connected successfully!");
 
@@ -454,3 +502,4 @@ async function startFirebase() {
 }
 
 startFirebase();
+            
