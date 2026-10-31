@@ -1,70 +1,53 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>CineMatch</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</body>
+</html>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+<h1>CineMatch 🎬</h1>
 
-<body>
+<p class="creator-top">
+    Created by <strong>Sumedh Shinde</strong>
+</p>
 
-    <h1>CineMatch 🎬</h1>
+<h2>Discover Your Next Favourite Movie</h2>
+<div class="auth-container" id="authSection">
 
-    <h2>Discover Your Next Favourite Movie</h2>
+    <h2>Welcome to CineMatch</h2>
 
-    <!-- ACCOUNT SECTION -->
+    <input type="text" id="username"
+    placeholder="Enter your name">
 
-    <div class="auth-container" id="authSection">
+    <input type="email" id="email"
+    placeholder="Enter your email">
 
-        <h2>Welcome to CineMatch</h2>
+    <input type="password" id="password"
+    placeholder="Enter your password">
 
-        <input type="text" id="username"
-        placeholder="Enter your name">
+    <button onclick="signUp()">Create Account</button>
 
-        <input type="email" id="email"
-        placeholder="Enter your email">
+    <button onclick="login()">Login</button>
 
-        <input type="password" id="password"
-        placeholder="Enter your password">
+    <button onclick="logout()" id="logoutBtn"
+    style="display:none;">Logout</button>
 
-        <button onclick="signUp()">Create Account</button>
+    <p id="authMessage"></p>
 
-        <button onclick="login()">Login</button>
+</div>
 
-        <button onclick="logout()" id="logoutBtn"
-        style="display:none;">Logout</button>
+<div class="search-box">
+    <input
+        type="text"
+        id="search"
+        placeholder="Search for a movie..."
+    >
+    <button onclick="searchMovie()">Search</button>
+</div>
 
-        <p id="authMessage"></p>
+<div id="movies"></div>
 
-    </div>
+<div id="movie-details"></div>
 
-    <!-- MOVIE SEARCH -->
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="search"
-            placeholder="Search for a movie..."
-        >
-
-        <button onclick="searchMovie()">Search</button>
-
-    </div>
-
-    <!-- MOVIE RESULTS -->
-
-    <div id="movies"></div>
-
-    <!-- MOVIE DETAILS -->
-
-    <div id="movie-details"></div>
-
-    <!-- JAVASCRIPT -->
-
-    <script src="script.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 
 </body>
 </html>
