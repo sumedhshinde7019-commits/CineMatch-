@@ -93,10 +93,10 @@ card.appendChild(button);
         });
 
     } catch (error) {
-        container.innerHTML =
-            "<p>Unable to load movies. Check your API key and internet connection.</p>";
-        console.error(error);
-    }
+    container.innerHTML =
+        "<p>Movie Error: " + error.message + "</p>";
+    console.error("TMDB ERROR:", error);
+}
 }
 
 function searchMovie() {
