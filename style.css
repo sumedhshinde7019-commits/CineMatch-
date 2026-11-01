@@ -1,354 +1,160 @@
-/* General page design */
-* {
+*{box-sizing:border-box}
+:root{color-scheme:dark}
+body{margin:0;padding:0;font-family:Arial,sans-serif;background:#061b1b;color:#f5f5f5}
+button{border:0;border-radius:5px;padding:11px 14px;font-weight:700;cursor:pointer;background:#d7b56d;color:#111}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #f5d995;outline-offset:2px}
+[hidden]{display:none!important}
+.site-header{padding:15px 22px 8px}
+.site-header h1{text-align:left;font-size:30px;letter-spacing:2px;color:#fff;margin:6px 0}
+.creator-top{color:#9aafaa;font-size:13px;margin:5px 0}
+.creator-top strong{color:#d7b56d}
+.site-header .tagline{text-align:left;color:#d0ded9;font-size:16px;font-weight:400;margin:8px 0 14px}
+#mainContent{background:radial-gradient(circle at center,#123c38,#061b1b 75%);padding:16px}
+.auth-container{position:relative;isolation:isolate;overflow:hidden;max-width:620px;min-height:250px;margin:12px auto 22px;padding:22px;background:#080b0d;border:1px solid #31544e;border-radius:7px}
+.login-poster-wall{position:absolute;inset:0;z-index:-1;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:10px;opacity:.38;transform:rotate(-8deg) scale(1.25)}
+.poster-track{display:flex;gap:10px;width:max-content;animation:posterMove 45s linear infinite}
+.poster-track:nth-child(2){animation-direction:reverse;animation-duration:55s}
+.poster-track:nth-child(3){animation-duration:65s}
+.poster-track img{width:90px;height:130px;object-fit:cover;border-radius:4px}
+.auth-content{position:relative;z-index:1;max-width:390px;margin:auto;padding:15px;background:rgba(3,13,12,.78);border-radius:6px;text-align:center}
+.auth-content h2{color:#d7b56d;margin:5px 0 16px}
+.auth-content input:not([type=file]){display:block;width:100%;padding:12px;margin:9px 0;background:#102522;color:#fff;border:1px solid #54766c;border-radius:4px;font-size:15px}
+.auth-content button{width:100%;margin:6px 0}
+#authMessage{overflow-wrap:anywhere;color:#b8e3c8;font-size:13px}
+#profileSection{margin-top:15px;padding:12px;background:#102522;border-radius:5px;text-align:left}
+#profileSection h2{text-align:center}
+#profilePicture{display:block;margin:10px auto;border-radius:50%;object-fit:cover;border:2px solid #d7b56d}
+#profileImageInput{width:100%;margin:8px 0}
+#profileSection p{font-size:12px;overflow-wrap:anywhere}
+.movie-discovery{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0 28px}
+.movie-discovery section{min-width:0;padding:12px;background:rgba(0,0,0,.25);border:1px solid #31544e;border-radius:5px}
+.movie-discovery section h2,#language-section h2{text-align:center;color:#d7b56d;font-size:16px;margin:5px 0 14px}
+.trending-tabs{display:flex;gap:6px;margin:10px 0}
+.trending-tabs button{flex:1;padding:8px 4px;font-size:12px}
+.trending-tabs button.active{background:#fff0bd;outline:1px solid white}
+#trendingMovies{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:3px}
+#trendingMovies::-webkit-scrollbar{display:none}
+#trendingMovies .movie-card{flex:0 0 100%;min-width:100%;scroll-snap-align:start}
+#upcomingMovies{display:grid;grid-template-columns:1fr;gap:10px}
+.discovery-card{min-width:0;background:#102522;border:1px solid #42645c;border-radius:4px;overflow:hidden}
+.discovery-card img{display:block;width:100%;height:150px;object-fit:cover}
+.discovery-card h3{font-size:12px;margin:8px;color:#fff}
+.discovery-card p{font-size:11px;margin:7px;color:#c5d1cb}
+.discovery-card button{display:block;width:calc(100% - 14px);margin:7px;padding:8px;font-size:11px}
+#language-section{margin:20px 0;padding:18px 8px;border-block:1px solid #31544e;text-align:center}
+#languageToggle{background:#244b40;color:#fff;border:1px solid #66877c}
+#languageMenu{margin-top:12px}
+#movieLanguage{width:min(100%,300px);padding:11px;background:#102522;color:#fff;border:1px solid #66877c;border-radius:4px}
+#languageMenu button{margin:8px}
+.top-buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.top-buttons button{padding:11px 17px}
+.watchlist-btn{background:#b8323e;color:white}
+.game-btn{background:#244b40;color:white;border:1px solid #66877c}
+.search-box{display:flex;gap:8px;max-width:650px;margin:22px auto}
+.search-box input{flex:1;min-width:0;padding:13px;background:#102522;color:#fff;border:1px solid #54766c;border-radius:4px;font-size:15px}
+.search-box button{background:#d7b56d}
+#movies{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:150px;gap:12px;margin:20px 0}
+.movie-card{position:relative;min-width:0;overflow:hidden;background:#102522;border:1px solid #42645c;border-radius:4px}
+#movies .movie-card:nth-child(5n+1),#movies .movie-card:nth-child(5n+3){grid-row:span 2}
+#movies .movie-card>img{display:block;width:100%;height:100%;min-height:100%;object-fit:cover}
+#movies .movie-card h3{position:absolute;left:0;right:0;bottom:0;margin:0;padding:35px 8px 9px;background:linear-gradient(transparent,rgba(0,0,0,.96));color:#fff;font-size:13px;pointer-events:none}
+#movies .movie-card p{font-size:11px;margin:4px 7px;color:#e2d8c2}
+#movies .movie-card button{position:relative;z-index:2;width:calc(100% - 12px);margin:3px 6px;padding:7px 4px;font-size:10px}
+#movie-details{max-width:950px;margin:10px auto 30px;background:#061b1b;color:#fff;overflow:hidden;border:1px solid #31544e;border-radius:5px}
+.cinema-back-button{margin:12px;background:#183b34;color:white;border:1px solid #66877c}
+.cinema-hero{min-height:280px;padding:18px 12px;background-color:#102522;background-size:cover;background-position:center;display:flex;align-items:center}
+.cinema-hero-content{display:flex;align-items:center;gap:14px;width:100%;max-width:900px;margin:auto}
+.cinema-main-poster{width:115px;max-width:38%;flex-shrink:0;border-radius:7px;box-shadow:0 8px 25px #000}
+.cinema-main-info{min-width:0}
+.cinema-main-info h1{font-size:22px;line-height:1.2;margin:0 0 7px;color:white;text-align:left}
+.cinema-tagline{font-size:11px;color:#d0c6ad}
+.cinema-meta,.cinema-genres,.cinema-actions{display:flex;flex-wrap:wrap;gap:5px;margin:9px 0}
+.cinema-meta span{font-size:10px;padding:5px 6px;background:#ffffff20;border-radius:4px}
+.cinema-genres span{font-size:10px;padding:5px 7px;background:#d7b56d;color:#111;border-radius:3px}
+.cinema-trailer-button,.cinema-watch-button,.cinema-favorite-button{padding:9px 10px;font-size:10px;border-radius:4px;font-weight:bold;text-decoration:none;border:1px solid #66877c;cursor:pointer}
+.cinema-trailer-button{background:#d7b56d;color:#111}
+.cinema-watch-button{background:#244b40;color:white}
+.cinema-favorite-button{background:#a52d4b;color:white}
+.cinema-section-title{font-size:19px;color:#d7b56d;margin:22px 13px 12px}
+.cinema-overview{margin:0 13px;color:#d0d8d3;font-size:13px;line-height:1.7}
+.cinema-crew-info{display:flex;flex-wrap:wrap;gap:20px;padding:12px;font-size:12px;border-bottom:1px solid #29483f}
+.cinema-cast-list{display:flex;gap:10px;overflow-x:auto;padding:8px 13px 15px;scroll-snap-type:x mandatory}
+.cinema-cast-card{flex:0 0 105px;background:#102522;border:1px solid #29483f;border-radius:6px;overflow:hidden;scroll-snap-align:start}
+.cinema-cast-card img{width:100%;height:125px;object-fit:cover;display:block}
+.cinema-cast-card h4,.cinema-cast-card p{font-size:11px;padding:0 7px}
+.cinema-cast-card p{font-size:10px;color:#b8c8bf}
+.cinema-key-crew{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0 13px}
+.cinema-key-crew-card{background:#102522;border:1px solid #29483f;padding:11px;border-radius:5px;font-size:11px}
+.cinema-key-crew-card strong{color:#d7b56d}
+.cinema-review-section{margin:0 13px 20px;padding:14px;background:#102522;border:1px solid #29483f;border-radius:6px}
+.cinema-review-section select,.cinema-review-section textarea{display:block;width:100%;padding:11px;margin:9px 0;background:#071b19;color:white;border:1px solid #49675e;border-radius:5px;font-size:14px}
+.cinema-review-section textarea{min-height:85px}
+.cinema-review-section button{background:#d7b56d;color:#111}
+.review-card{padding:12px;margin-top:10px;background:#18332e;border-radius:5px;overflow-wrap:anywhere}
+#watchlist-section{min-height:80vh;padding:20px;background:radial-gradient(circle at center,#123c38,#061b1b 80%);color:white}
+#watchlist-section h2{text-align:center;color:#d7b56d}
+#watchlistMovies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+#watchlistMovies .movie-card{min-height:180px}
+#watchlistMovies img{width:100%;height:150px;object-fit:cover}
+#watchlistMovies h3,#watchlistMovies p{margin:8px;font-size:12px}
+#watchlistMovies button{margin:7px;font-size:11px}
+#movie-game{max-width:550px;margin:25px auto;padding:22px 16px;background:#102522;border:1px solid #42645c;border-radius:10px;text-align:center}
+#movie-game h2{color:#d7b56d}
+.game-info{display:flex;justify-content:space-around;gap:10px;padding:13px;background:#18332e;border-radius:8px}
+.emoji-box{padding:22px;background:#18332e;border-radius:8px;margin:18px 0}
+.emoji-box h3{font-size:42px;margin:0}
+#game-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0}
+#game-options button{background:#244b40;color:white}
+#game-message{font-weight:bold}
+@keyframes posterMove{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(min-width:700px){.cinema-hero{min-height:380px;padding:30px}.cinema-main-poster{width:190px}.cinema-main-info h1{font-size:35px}.cinema-overview{font-size:15px}.cinema-cast-card{flex-basis:135px}.cinema-cast-card img{height:165px}}
+@media(max-width:600px){#mainContent{padding:10px}.movie-discovery{gap:8px}.movie-discovery section{padding:8px 6px}.movie-discovery section h2{font-size:13px}#movies{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:130px;gap:8px}#movies .movie-card h3{font-size:12px}#movies .movie-card button{font-size:9px;padding:6px 2px}.site-header h1{font-size:26px}.cinema-hero{min-height:250px}.cinema-main-poster{width:105px}.cinema-main-info h1{font-size:19px}}
+@media(max-width:360px){.search-box{flex-direction:column}.movie-discovery{grid-template-columns:1fr 1fr}.cinema-hero-content{gap:9px}.cinema-main-poster{width:90px}.cinema-meta span{font-size:9px}}
+
+/* TRENDING AND UPCOMING MOVIE SLIDERS */
+
+#trendingMovies,
+#upcomingMovies {
+    display: flex !important;
+    width: 100%;
+    gap: 0;
+    overflow: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+    padding: 3px;
+}
+
+#trendingMovies .discovery-card,
+#upcomingMovies .discovery-card {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 100%;
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background: #0b0b0f;
-    color: #ffffff;
-}
-
-/* Main title */
-h1 {
-    text-align: center;
-    color: #ff3040;
-    font-size: 38px;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
-
-/* Subtitle */
-h2 {
-    text-align: center;
-    font-size: 17px;
-    font-weight: normal;
-    color: #bdbdc7;
-    margin-bottom: 30px;
-}
-
-/* Movie search area */
-#search {
-    width: 70%;
-    max-width: 500px;
-    padding: 14px;
-    border: 1px solid #393943;
-    border-radius: 8px;
-    background: #1c1c24;
-    color: white;
-    font-size: 15px;
-    outline: none;
-}
-
-#search:focus {
-    border-color: #ff3040;
-}
-
-button {
-    padding: 14px 18px;
-    background: #ff3040;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #d91e2c;
-}
-
-/* Movie grid */
-#movies {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 35px;
-}
-
-/* Individual movie cards */
-.movie-card {
-    background: #191920;
-    border: 1px solid #292932;
-    border-radius: 12px;
-    overflow: hidden;
-    padding-bottom: 12px;
-    transition: transform 0.2s ease;
-}
-
-.movie-card:hover {
-    transform: translateY(-4px);
-}
-
-/* Movie posters */
-.movie-card img {
+#trendingMovies .discovery-card img,
+#upcomingMovies .discovery-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
     display: block;
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
 }
 
-/* Movie title */
-.movie-card h3 {
-    font-size: 15px;
-    line-height: 1.4;
-    margin: 12px 10px 8px;
-    color: #ffffff;
-}
-
-/* Movie information */
-.movie-card p {
-    font-size: 12px;
-    line-height: 1.6;
-    color: #b8b8c2;
-    margin: 8px 10px;
-}
-
-/* Mobile layout */
-@media (max-width: 350px) {
-    body {
-        padding: 12px;
-    }
-
-    #movies {
-        gap: 10px;
-    }
-
-    h1 {
-        font-size: 30px;
-    }
-}
-.search-box {
-display: flex;
-gap: 8px;
-max-width: 600px;
-margin: 25px auto;
-}
-
-#search {
-flex: 1;
-min-width: 0;
-padding: 14px;
-border: 1px solid #393943;
-border-radius: 8px;
-background: #1c1c24;
-color: white;
-font-size: 15px;
-}
-
-.search-box button {
-padding: 14px 18px;
-background: #ff3040;
-color: white;
-border: none;
-border-radius: 8px;
-font-weight: bold;
-}
-
-@media (max-width: 350px) {
-.search-box {
-flex-direction: column;
-}
-}
-/* Movie details panel */
-#movie-details {
-    display: none;
-    margin: 30px auto;
-    padding: 20px;
-    max-width: 900px;
-    background: #191920;
-    border: 1px solid #33333d;
-    border-radius: 14px;
-}
-
-#movie-details .detail-poster {
-    width: 180px;
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-.details-layout {
-    display: flex;
-    gap: 22px;
-    align-items: flex-start;
-}
-
-.details-info {
-    flex: 1;
-    min-width: 0;
-}
-
-#movie-details h2,
-#movie-details h3 {
-    text-align: left;
-    color: #ff3040;
-}
-
-#movie-details p {
-    color: #d0d0d8;
-    line-height: 1.6;
-}
-
-#movie-details a {
-    display: inline-block;
-    color: white;
-    background: #ff3040;
-    text-decoration: none;
-    padding: 10px 14px;
-    margin: 5px 5px 5px 0;
-    border-radius: 6px;
-}
-
-.cast-list {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    padding: 10px 0;
-}
-
-.cast-card {
-    min-width: 110px;
-    width: 110px;
-    background: #25252e;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.cast-card img {
-    width: 100%;
-    height: 145px;
-    object-fit: cover;
-}
-
-.cast-card p {
-    padding: 0 8px;
-    font-size: 12px;
-}
-
-.back-button {
-    margin-bottom: 20px;
-}
-
-@media (max-width: 500px) {
-    #movie-details {
-        padding: 14px;
-    }
-
-    .details-layout {
-        gap: 12px;
-    }
-
-    #movie-details .detail-poster {
-        width: 115px;
-    }
-}
-/* ACCOUNT SECTION */
-
-.auth-container {
-    max-width: 400px;
-    margin: 30px auto;
-    padding: 30px 25px;
-    background: #1c1c1c;
-    border: 1px solid #333;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
-}
-
-.auth-container h2 {
-    color: #ffffff;
-    font-size: 25px;
-    margin-bottom: 25px;
-}
-
-.auth-container input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 14px;
-    margin: 10px 0;
-    background: #2b2b2b;
-    border: 1px solid #444;
-    border-radius: 8px;
-    color: white;
-    font-size: 15px;
-    outline: none;
-}
-
-.auth-container input:focus {
-    border-color: #e50914;
-}
-
-.auth-container input::placeholder {
-    color: #aaa;
-}
-
-.auth-container button {
-    width: 100%;
-    padding: 13px;
-    margin-top: 12px;
-    background: #e50914;
-    color: white;
-    border: none;
-    border-radius: 8px;
+#trendingMovies .discovery-card h3,
+#upcomingMovies .discovery-card h3 {
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
+    padding: 5px;
 }
 
-.auth-container button:hover {
-    background: #b20710;
-}
-
-#authMessage {
-    color: #00e676;
+#trendingMovies .discovery-card p,
+#upcomingMovies .discovery-card p {
     font-size: 14px;
-    margin-top: 15px;
-    overflow-wrap: anywhere;
 }
 
-/* ACCOUNT SECTION ON MOBILE */
-
-@media (max-width: 480px) {
-    .auth-container {
-        margin: 20px 12px;
-        padding: 22px 18px;
-    }
-}
-
-button.favorite-button {
-    background-color: #00c853 !important;
-    color: white !important;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 5px;
-}
-
-button.favorite-button:hover {
-    background-color: #009624 !important;
-}
-.creator-top {
-    text-align: center;
-    color: #aaaaaa;
+#trendingMovies .discovery-card button,
+#upcomingMovies .discovery-card button {
+    width: calc(100% - 14px);
+    margin: 7px;
+    padding: 11px;
     font-size: 14px;
-    margin-top: -5px;
-    margin-bottom: 20px;
 }
-
-.creator-top strong {
-    color: #00c853;
-    font-weight: bold;
-}
-
-    
-
-
-    
-
